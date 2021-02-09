@@ -13,7 +13,7 @@ export default function User(props) {
     const [isBtnHide, setIsBtnHide] = useState(true);
 
     useEffect(() => {
-        fetch("http://localhost:9990/user", {credentials: "include"})  
+        fetch("https://newreleases.tk/user_artist", {credentials: "include"})  
             .then(response => response.json())
             .then((json) => {
             console.log(json)

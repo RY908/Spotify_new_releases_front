@@ -17,7 +17,7 @@ export default class Login extends React.Component {
                 <Popup />
                 <div className="login">
                     <button type="button" onClick={() => {
-                        window.location = "http://localhost:9990/"
+                        window.location = "https://newreleases.tk/login"
                     }}>Log in with Spotify</button> 
                 </div>
             </div>
