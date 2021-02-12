@@ -6,7 +6,7 @@ export default function Callback(props) {
     console.log(token)
     return (
         <div>
-        <Redirect to={"/user/"+token}></Redirect>
+        <Redirect to="/" />
         </div>
     );
 }
