@@ -13,7 +13,7 @@ export default function User(props) {
     const [isBtnHide, setIsBtnHide] = useState(true);
 
     useEffect(() => {
-        fetch("https://newreleases.tk/user_artist", {credentials: "include"})  
+        fetch("http://localhost:9990/api/user", {credentials: "include"})  
             .then(response => response.json())
             .then((json) => {
             console.log(json)
@@ -25,7 +25,6 @@ export default function User(props) {
     useEffect(() => {
         //checkedItemsが空では無い場合、送信ボタンを表示させる
         Object.keys(checkedItems).length && setIsBtnHide(false)
-        //すべてのcheckedItemの値がfalseの場合に送信ボタンを表示させる
         setTimeout(() => {
         if (
             Object.values(checkedItems).every(checkedItem => {
@@ -53,6 +52,19 @@ export default function User(props) {
             return pre
         },[])
         console.log("dataPushArray:", dataPushArray)
+        fetch("http://localhost:9990/api/delete", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                // "Content-Type": "application/json"
+            },
+            body: JSON.stringify({"artistsId": dataPushArray})
+        }).then(response => response.json())
+            .then((json) => {
+                console.log(json)
+                setArtists(json.artists)
+                setRedirect(json.result)
+                console.log("push")})
     }
 
     return (
