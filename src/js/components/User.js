@@ -13,7 +13,7 @@ export default function User(props) {
     const [isBtnHide, setIsBtnHide] = useState(true);
 
     useEffect(() => {
-        fetch("http://localhost:9990/api/user", {credentials: "include"})  
+        fetch("https://newreleases.tk/api/user", {credentials: "include"})  
             .then(response => response.json())
             .then((json) => {
             console.log(json)
@@ -52,7 +52,7 @@ export default function User(props) {
             return pre
         },[])
         console.log("dataPushArray:", dataPushArray)
-        fetch("http://localhost:9990/api/delete", {
+        fetch("https://newreleases.tk/api/delete", {
             method: "POST",
             credentials: "include",
             headers: {
