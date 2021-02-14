@@ -68,7 +68,7 @@ export default function User(props) {
     }
 
     return (
-        <div>
+        <div className="page">
             {redirect === "redirect" ? 
                 (<div>
                 <Redirect to="/" />
