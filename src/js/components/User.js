@@ -11,9 +11,11 @@ export default function User(props) {
     const [redirect, setRedirect] = useState("");
     const [checkedItems, setCheckedItems] = useState({});
     const [isBtnHide, setIsBtnHide] = useState(true);
+    const user_uri = "http://localhost:9990/api/user";
+    const delete_uri = "http://localhost:9990/api/delete";
 
     useEffect(() => {
-        fetch("https://newreleases.tk/api/user", {credentials: "include"})  
+        fetch(user_uri, {credentials: "include"})  
             .then(response => response.json())
             .then((json) => {
             console.log(json)
@@ -52,7 +54,7 @@ export default function User(props) {
             return pre
         },[])
         console.log("dataPushArray:", dataPushArray)
-        fetch("https://newreleases.tk/api/delete", {
+        fetch(delete_uri, {
             method: "POST",
             credentials: "include",
             headers: {
