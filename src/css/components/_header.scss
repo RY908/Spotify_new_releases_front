@@ -13,7 +13,12 @@ header {
         img.logo {
             height: 200px;
             width: 200px;
-            margin-left: 0px;
+            margin-left: 10px;
+        }
+        #setting-header:hover {
+            cursor : pointer;
+            opacity: 0.6;
+            transition-duration: 0.3s;
         }
         
         // img.maker {
