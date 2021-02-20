@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Login from "./Login";
 import Callback from "./Callback";
 import User from "./User";
+import Setting from "./Setting"
 import { BrowserRouter as Router, Route} from "react-router-dom";
 import Cookies from 'js-cookie';
 
@@ -21,6 +22,7 @@ export default function Layout() {
             <Route exact path="/" component={Login} />
             <Route path="/callback/:token" component={Callback} /> 
             <Route path="/user/:token" component={User} />
+            <Route path="/setting" component={Setting} />
             </div>
         </Router>
         </div>
