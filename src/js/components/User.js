@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import Artist from './Artist';
 import CheckedArtist from './CheckedArtist';
 import Header from "./Header";
@@ -11,11 +11,11 @@ export default function User(props) {
     const [redirect, setRedirect] = useState("");
     const [checkedItems, setCheckedItems] = useState({});
     const [isBtnHide, setIsBtnHide] = useState(true);
-    const user_uri = "http://localhost:9990/api/user";
-    const delete_uri = "http://localhost:9990/api/delete";
+    const userUri = "http://localhost:9990/api/user";
+    const deleteUri = "http://localhost:9990/api/delete";
 
     useEffect(() => {
-        fetch(user_uri, {credentials: "include"})  
+        fetch(userUri, {credentials: "include"})  
             .then(response => response.json())
             .then((json) => {
             console.log(json)
@@ -54,7 +54,7 @@ export default function User(props) {
             return pre
         },[])
         console.log("dataPushArray:", dataPushArray)
-        fetch(delete_uri, {
+        fetch(deleteUri, {
             method: "POST",
             credentials: "include",
             headers: {
@@ -66,6 +66,8 @@ export default function User(props) {
                 console.log(json)
                 setArtists(json.artists)
                 setRedirect(json.result)
+                setIsBtnHide(false)
+                setCheckedItems({})
                 console.log("push")})
     }
 
@@ -78,10 +80,14 @@ export default function User(props) {
                 : 
                 (<div className="user-page">
                     <Header />
-                    <div className="guide-container"> 
+                    <div className="navi-container"> 
                         <Guide />
+                        <Link to ="/setting" id="to-setting">
+                            <img id="settings-icon" src="../img/icons/png/017-settings.png"/>
+                            setting
+                        </Link>
                         <Logout />
-                        {!isBtnHide && <div className="delete-button-div"><button className="delete-button" onClick={dataSendBtn}>Never show in the playlist</button></div>}
+                        {!isBtnHide && <div className="delete-button-div"><button className="delete-button" onClick={dataSendBtn}>Don't add tracks by selected artists</button></div>}
                     </div>
                     <div className="artistContainer">
                     {
@@ -109,6 +115,7 @@ export default function User(props) {
                         }})
                     }
                     </div>
+                    <div className="footer">Icons in navigation bar made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                 </div>)
             }
         </div>

@@ -9,7 +9,10 @@ export default function Guide() {
     return (
         <div className="guide">
             <div className="Modal"> 
-                <button className="modal-button" onClick={() => setIsOpen(true)}>Guide</button>
+                <button className="modal-button" onClick={() => setIsOpen(true)}>
+                    <img id="guide-icon" src="../img/icons/png/057-question.png" />
+                    Guide
+                </button>
                 <Modal isOpen={modalIsOpen} 
                     onRequestClose={() => setIsOpen(false)}
                     overlayClassName={{
