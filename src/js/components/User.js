@@ -11,11 +11,11 @@ export default function User(props) {
     const [redirect, setRedirect] = useState("");
     const [checkedItems, setCheckedItems] = useState({});
     const [isBtnHide, setIsBtnHide] = useState(true);
-    const userUri = "http://localhost:9990/api/user";
-    const deleteUri = "http://localhost:9990/api/delete";
+    const userUri = "https://api.newreleases.tk/api/user";
+    const deleteUri = "https://api.newreleases.tk/api/delete";
 
     useEffect(() => {
-        fetch(userUri, {credentials: "include"})  
+        fetch(userUri, {credentials: "include"})
             .then(response => response.json())
             .then((json) => {
             console.log(json)

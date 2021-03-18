@@ -9,13 +9,14 @@ export default function Setting(props) {
     const [remix, setRemix] = useState(false);
     const [acoustic, setAcoustic] = useState(false);
     const [saved, setSaved] = useState(false);
-    const updateUri = "http://localhost:9990/api/setting";
-    const saveUri = "http://localhost:9990/api/setting/save";
+    const updateUri = "https://api.newreleases.tk/api/setting";
+    const saveUri = "https://api.newreleases.tk/api/setting/save";
 
     useEffect(() => {
         fetch(updateUri, {credentials: "include"})
             .then(response => response.json())
             .then((json) => {
+		console.log(json)
                 setRemix(json.ifRemixAdd)
                 setAcoustic(json.ifAcousticAdd)
                 setRedirect(json.Result)
