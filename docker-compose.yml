@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  react_app:
+    build: .
+    ports:
+      - "8080"
+    volumes:
+      - './build:/app/build'
+      - '/app/node_modules'
+    tty: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - NODE_ENV=development
+      - VIRTUAL_HOST=newreleases.tk
+      - LETSENCRYPT_HOST=newreleases.tk
+      - LETSENCRYPT_EMAIL=$EMAIL
+    #command: "npm start"
+    command: "serve -s ./build -l 8080 -n"
+    networks: 
+      - app1
+  
+  #front_nginx:
+  #  image: julienvincent/nginx:react
+  #  ports:
+  #    - "8081"
+  #  volumes:
+  #    - ./build:/data/www
+  #    #- ./conf/:/etc/nginx/conf.d/
+  #    - ./build:/usr/share/nginx/html
+  #  environment:
+  #    - VIRTUAL_HOST=newreleases.tk
+  #    - LETSENCRYPT_HOST=newreleases.tk
+  #    - LETSENCRYPT_EMAIL=$EMAIL
+  #    - NODE_ENV=development
+  #  networks: 
+  #    - app1
+
+networks: 
+  app1:
+    external: true
