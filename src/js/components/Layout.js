@@ -9,10 +9,10 @@ import Cookies from 'js-cookie';
 
 export default function Layout() {
     useEffect(() => {
-        // Cookies.remove('token');
-        // Cookies.remove('refreshToken');
-        // Cookies.remove('tokenType');
-        // Cookies.remove('expiry');
+         Cookies.remove('token');
+         Cookies.remove('refreshToken');
+         Cookies.remove('tokenType');
+         Cookies.remove('expiry');
     })
 
     return (
