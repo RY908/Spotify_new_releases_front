@@ -13,6 +13,7 @@ export default class Login extends React.Component {
                 <Header />
                 <h1 className="explanation">
                     Do you want a perfect playlist? 
+                    {window._env_.LOGIN_URL}
                 </h1>
                 <Popup />
                 <div className="login">

@@ -9,11 +9,11 @@ export default function Setting(props) {
     const [remix, setRemix] = useState(false);
     const [acoustic, setAcoustic] = useState(false);
     const [saved, setSaved] = useState(false);
-    const updateUri = "https://api.newreleases.tk/api/setting";
+    const settingUri = "https://api.newreleases.tk/api/setting";
     const saveUri = "https://api.newreleases.tk/api/setting/save";
 
     useEffect(() => {
-        fetch(updateUri, {credentials: "include"})
+        fetch(settingUri, {credentials: "include"})
             .then(response => response.json())
             .then((json) => {
 		console.log(json)
