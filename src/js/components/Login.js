@@ -1,28 +1,11 @@
 import React from "react";
-import Cookies from 'js-cookie';
-import Header from "./Header";
-import Popup from "./Popup";
 
-
-export default class Login extends React.Component {
-    render() {
-        Cookies.remove('token');
-        Cookies.remove('spotify_access_token');
-        return (
-            <div className="login-page">
-                <Header />
-                <h1 className="explanation">
-                    Do you want a perfect playlist? 
-                    {window._env_.LOGIN_URL}
-                </h1>
-                <Popup />
-                <div className="login">
-                    <button type="button" onClick={() => {
-                        window.location = "https://api.newreleases.tk/api/login";
-                        // window.location = "http://localhost:9990/api/login"
-                    }}>Log in with Spotify</button> 
-                </div>
-            </div>
-        );
-    }
+export default function Login() {
+    return (
+        <div className="login">
+            <button type="button" onClick={() => {
+                window.location = window._env_.LOCAL_LOGIN_URI;
+            }}>Log in with Spotify</button> 
+        </div>
+    )
 }
