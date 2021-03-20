@@ -1,18 +1,6 @@
 import React from "react";
 import { useHistory, useLocation, useEffect } from "react-router-dom";
 
-// export default class Header extends React.Component {
-//     render() {
-//         return (
-//             <header>
-//                 <div className="header-container">
-//                     <img className="logo" src="../img/logo.png" />
-//                 </div>
-//             </header>
-//         );
-//     }
-// }
-
 export default function Header(props) {
     const history = useHistory();
     const location = useLocation();
