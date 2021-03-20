@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, Link } from "react-router-dom";
-import Artist from './Artist';
-import CheckedArtist from './CheckedArtist';
 import Header from "./Header";
 import Guide from "./Guide";
 import Logout from "./Logout";
+import Navigator from "./Navigator";
+import Artist from "./Artist";
 
 export default function User(props) {
     const [artists, setArtists] = useState([]);
     const [redirect, setRedirect] = useState("");
     const [checkedItems, setCheckedItems] = useState({});
     const [isBtnHide, setIsBtnHide] = useState(true);
-    const userUri = "https://api.newreleases.tk/api/user";
-    const deleteUri = "https://api.newreleases.tk/api/delete";
+    const userUri = window._env_.LOCAL_USER_URI;
+    const deleteUri = window._env_.LOCAL_DELETE_URI;
 
     useEffect(() => {
         fetch(userUri, {credentials: "include"})
             .then(response => response.json())
             .then((json) => {
-            console.log(json)
-            setArtists(json.artists)
-            setRedirect(json.result)
-            console.log(artists)});
+                console.log(json)
+                setArtists(json.artists)
+                console.log(artists)})
     }, []);
 
     useEffect(() => {
@@ -80,39 +79,15 @@ export default function User(props) {
                 : 
                 (<div className="user-page">
                     <Header />
-                    <div className="navi-container"> 
-                        <Guide />
-                        <Link to ="/setting" id="to-setting">
-                            <img id="settings-icon" src="../img/icons/png/017-settings.png"/>
-                            setting
-                        </Link>
-                        <Logout />
-                        {!isBtnHide && <div className="delete-button-div"><button className="delete-button" onClick={dataSendBtn}>Don't add tracks by selected artists</button></div>}
-                    </div>
+                    <Navigator page="userpage" isBtnHide={isBtnHide} onClick={dataSendBtn} />
                     <div className="artistContainer">
                     {
                         artists.map(artist => {
-                        if (checkedItems[artist.ArtistId]) {
-                            return <CheckedArtist 
-                                id={artist.ArtistId} 
-                                name={artist.Name} 
-                                url={artist.Url} 
-                                iconUrl={artist.IconUrl} 
-                                key={artist.ArtistId}
-                                onChange={handleChange}
-                                checked={checkedItems[artist.ArtistId]}
-                            />
-                        } else {
-                            return <Artist 
-                                id={artist.ArtistId} 
-                                name={artist.Name} 
-                                url={artist.Url} 
-                                iconUrl={artist.IconUrl} 
-                                key={artist.ArtistId}
-                                onChange={handleChange}
-                                checked={checkedItems[artist.ArtistId]}
-                            />
-                        }})
+                            if (checkedItems[artist.ArtistId] === undefined) {
+                                checkedItems[artist.ArtistId] = false;
+                            }
+                            return <Artist key={artist.ArtistId} artist={artist} onChange={handleChange} checked={checkedItems[artist.ArtistId]} />
+                        })
                     }
                     </div>
                     <div className="footer">Icons in navigation bar made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>

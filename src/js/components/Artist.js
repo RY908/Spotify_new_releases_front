@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 export default function Artist(props) {
-    const [id, setId] = useState(props.id)
-    const [name, setName] = useState(props.name)
-    const [url, setUrl] = useState(props.url)
-    const [iconUrl, setIconUrl] = useState(props.iconUrl)
-    const [checked, setChecked] = useState(props.checked)
+    const [id, setId] = useState(props.artist.ArtistId)
+    const [name, setName] = useState(props.artist.Name)
+    const [url, setUrl] = useState(props.artist.Url)
+    const [iconUrl, setIconUrl] = useState(props.artist.IconUrl)
 
-    const style = {
+    const uncheckedStyle = {
         backgroundImage: `url(${iconUrl})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
@@ -19,19 +18,34 @@ export default function Artist(props) {
         borderRadius: "50%"
     }
 
-    useEffect(() => {
-        console.log(checked);
-        
-    }, [checked]);
-    
+    const checkedStyle = {
+        backgroundImage: `url(${iconUrl})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        height: "70px",
+        width: "70px",
+        display: "inline-block",
+        padding: "0 0 0 0px",
+        borderRadius: "50%",
+        borderStyle: "solid",
+        borderWitdh: "5px",
+        borderColor: "#fa3e90"
+    }
+
+    const handleChange = (e) => {
+        props.onChange(e)
+    }
+
     return (
         <div className="artist">
-            {/* <input type='checkbox' name='artist' value={id} id={id} style={{WebkitAppearance: "none"}} /> */}
-            <input type='checkbox' name='artist' value={id} id={id} onChange={props.onChange} checked={checked}/>
-            <label htmlFor={id} style={style}></label>
-            {/* <img src={iconUrl} className="artist-icon"/> */}
+            <input type='checkbox' name='artist' value={id} id={id} onChange={handleChange} checked={props.checked}/>
+            {!props.checked ? (
+                <label htmlFor={id} style={uncheckedStyle}></label>
+            ): (
+                <label htmlFor={id} style={checkedStyle}></label>
+            )}
             <a href={url} target="_blank" className="artist-name">{name}</a>
         </div>
-    )
+    );
 }
-
