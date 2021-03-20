@@ -6,3 +6,5 @@
 build/
 /src/img/icons/
 /src/env-config.js
+/src/js/components/PreArtist.js
+/src/js/components/PreCheckedArtist.js
