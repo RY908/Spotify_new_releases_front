@@ -1,26 +1,18 @@
 import React, { useEffect } from "react";
-import Login from "./Login";
-import Callback from "./Callback";
-import User from "./User";
-import Setting from "./Setting"
+import Login from "./components/Login";
+import User from "./components/User";
+import Setting from "./components/Setting"
 import { BrowserRouter as Router, Route} from "react-router-dom";
 import Cookies from 'js-cookie';
+import LoginPage from "./pages/LoginPage";
 
 
 export default function Layout() {
-    useEffect(() => {
-         Cookies.remove('token');
-         Cookies.remove('refreshToken');
-         Cookies.remove('tokenType');
-         Cookies.remove('expiry');
-    })
-
     return (
         <div className="layout">
         <Router>
             <div className="router">
-            <Route exact path="/" component={Login} />
-            <Route path="/callback/:token" component={Callback} /> 
+            <Route exact path="/" component={LoginPage} />
             <Route path="/user/:token" component={User} />
             <Route path="/setting" component={Setting} />
             </div>
