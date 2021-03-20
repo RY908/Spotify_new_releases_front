@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Redirect, Link, useHistory } from "react-router-dom";
 import Header from "./Header";
 import Logout from "./Logout";
+import Toggle from "./Toggle";
+import Navigator from "./Navigator";
 
 export default function Setting(props) {
     const history = useHistory();
@@ -9,14 +11,14 @@ export default function Setting(props) {
     const [remix, setRemix] = useState(false);
     const [acoustic, setAcoustic] = useState(false);
     const [saved, setSaved] = useState(false);
-    const settingUri = "https://api.newreleases.tk/api/setting";
-    const saveUri = "https://api.newreleases.tk/api/setting/save";
+    const settingUri = window._env_.LOCAL_SETTING_URI;
+    const saveUri = window._env_.LOCAL_SAVE_URI;
 
     useEffect(() => {
         fetch(settingUri, {credentials: "include"})
             .then(response => response.json())
             .then((json) => {
-		console.log(json)
+		        console.log(json)
                 setRemix(json.ifRemixAdd)
                 setAcoustic(json.ifAcousticAdd)
                 setRedirect(json.Result)
@@ -38,6 +40,20 @@ export default function Setting(props) {
                 }})
     }
 
+    const handleRemixChange = () => {
+        setRemix(!remix); 
+        setSaved(false);
+    }
+
+    const handleAcousticChange = () => {
+        setAcoustic(!acoustic); 
+        setSaved(false);
+    }
+
+    const handleButtonClick = () => {
+        history.goBack();
+    }
+
     return (
         <div className="page">
             {redirect === "redirect" ? 
@@ -47,36 +63,21 @@ export default function Setting(props) {
                 : 
                 (<div className="setting-page">
                     <Header />
-                    <div className="navi-container"> 
-                        <button onClick={() => history.goBack()} id="back">
-                            <img id="home-icon" src="../img/icons/png/006-home.png"></img>
-                            Back
-                        </button>
-                        <Logout />
-                    </div>
+                    <Navigator page="settingpage" onClick={handleButtonClick} />
                     <div className="setting-explanation">
                         You can edit whether you want remix tracks or acoustic tracks in your playlist here. <br/>
                     </div>
-                    <div className="remix">
-                        <p id="remix">Remix　{remix ? 'ON' : 'OFF'}　</p>
-                        <div className="remix-switch">
-                            <input id="remix-toggle" className="toggle-input" type='checkbox' onChange={() => {setRemix(!remix); setSaved(false)}} checked={remix} />
-                            <label id="remix-toggle-label" htmlFor="remix-toggle" className="toggle-label"/>
-                        </div>
-                    </div>
+
+                    <Toggle className="remix" name="remix" onChange={handleRemixChange} flag={remix} />
                     <p id="remix-off-explanation">
                         If you set remix off, the application will remove tracks named "(track name)- Remix".
                     </p>
-                    <div className="acoustic">
-                        <p id="acoustic">Acoustic {acoustic ? 'ON' : 'OFF'} </p>
-                        <div className="acoustic-switch">
-                            <input id="acoustic-toggle" className="toggle-input" type='checkbox' onChange={() => {setAcoustic(!acoustic); setSaved(false)}} checked={acoustic} />
-                            <label id="acoustic-toggle-label" htmlFor="acoustic-toggle" className="toggle-label" />
-                        </div>
-                    </div>
+
+                    <Toggle className="acoustic" name="acoustic" onChange={handleAcousticChange} flag={acoustic} />
                     <p id="acoustic-off-explanation">
                     If you set acoustic off, the application will remove tracks named "(track name) - Acoustic".
                     </p>
+
                     <div className="save">
                         <button type="button" onClick={handleSaveClick}>Save</button> 
                     </div>
