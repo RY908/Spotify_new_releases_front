@@ -11,7 +11,7 @@ export default function Guide() {
             <div className="Modal"> 
                 <button className="modal-button" onClick={() => setIsOpen(true)}>
                     <img id="guide-icon" src="../img/icons/png/057-question.png" />
-                    Guide
+                    <p>Guide</p>
                 </button>
                 <Modal isOpen={modalIsOpen} 
                     onRequestClose={() => setIsOpen(false)}

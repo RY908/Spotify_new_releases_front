@@ -30,7 +30,7 @@ export default function Popup() {
                     This is application keeps track of your listening history and create a playlist
                     based on the artists you listened to and you follow.
                 </p>
-                <h3 className="scopes">Used Scopes</h3>
+                <h2 className="scopes">Used Scopes</h2>
                 <div className="scope-list">
                     <p>The set of scopes that are required for you to access this Application:</p>
                     <ul>

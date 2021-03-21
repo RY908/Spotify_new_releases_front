@@ -17,10 +17,10 @@ export default function Navigator(props) {
                     <Guide />
                     <Link to ="/setting" id="to-setting">
                         <img id="settings-icon" src="../img/icons/png/017-settings.png"/>
-                        setting
+                        <p>Settings</p>
                     </Link>
                     <Logout />
-                    {!props.isBtnHide && <div className="delete-button-div"><button className="delete-button" onClick={handleClick}>Don't add tracks by selected artists</button></div>}
+                    {!props.isBtnHide && <div className="delete-button-div"><button className="delete-button" onClick={handleClick}>Remove</button></div>}
                 </div>
                 :
                 <div className="navi-container"> 

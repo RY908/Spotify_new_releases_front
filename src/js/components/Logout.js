@@ -16,7 +16,7 @@ export default function Logout(props) {
         <div className="logout-area">
             <button onClick={handleClick} className="logout">
                 <img id="logout-icon" src="../img/icons/png/059-logout.png"/>
-                Logout
+                <p>Logout</p>
             </button>
             {toHome && <Redirect to="/" />}
         </div>
