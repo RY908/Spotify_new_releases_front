@@ -1,0 +1,123 @@
+$hd-min: 1200px;
+$desktop-max: 1199px;
+$desktop-min: 992px;
+$laptop-max: 991px;
+$laptop-min: 768px;
+$tablet-max: 767px;
+$tablet-min: 576px;
+$mobile-max: 575px;
+
+@mixin screen-hd {
+    @media screen and (min-width: $hd-min) {
+      @content;
+    }
+}
+@mixin screen-desktop {
+    @media screen and (min-width: $desktop-min) and (max-width: $desktop-max) {
+        @content;
+    }
+}
+@mixin screen-laptop {
+    @media screen and (min-width: $laptop-min) and (max-width: $laptop-max) {
+        @content;
+    }
+}
+@mixin screen-tablet {
+    @media screen and (min-width: $tablet-min) and (max-width: $tablet-max) {
+        @content;
+    }
+}
+@mixin screen-mobile {
+    @media screen and (max-width: $mobile-max) {
+        @content;
+    }
+}
+
+.login-page {
+    min-height: 100vh;
+    background: url("../img/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    
+
+    .explanation {
+        font-size: 5vw;
+        font-weight: bold;
+        color: #fa3e90;
+        text-align: center;
+        margin-top: 40px;
+        @include screen-hd {
+            font-size: 5vw;
+        }
+        @include screen-desktop {
+            font-size: 5vw;
+        }
+        @include screen-laptop {
+            font-size: 5vw;
+        }
+        @include screen-tablet {
+            font-size: 5vw;
+        }
+        @include screen-mobile {
+            font-size: 5.5vw;
+        }
+    }
+    .login {
+        text-align: center;
+        button {
+            width: 30%;
+            height: auto;
+            position: absolute;
+            top: 80%;
+            transform: translate(-50%, -50%);
+            border: transparent;
+        
+            display: inline-block;
+            color: #FFF;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 30px;
+            background-image: linear-gradient(-90deg, #fa3e90, hsl(216, 88%, 39%));
+            transition: .5s;
+            background-size: 200%;
+            border: none;
+            outline: none;
+            @include screen-hd {
+                top: 80%;
+                height: 6%;
+                font-size: 1.8vw;
+            }
+            @include screen-desktop {
+                top: 75%;
+                height: 6%;
+                font-size: 1.8vw;
+            }
+            @include screen-laptop {
+                width: 40%;
+                height: 6%;
+                top: 70%;
+                font-size: 1.8vw;
+            }
+            @include screen-tablet {
+                width: 40%;
+                height: 7%;
+                top: 70%;
+                font-size: 1.8vw;
+            }
+            @include screen-mobile {
+                top: 70%;
+                width: 50%;
+                height: 8%;
+                font-size: 2vw;
+            }
+        }
+        
+        button:hover {
+            background-position: right center;
+        }
+    }
+}
+

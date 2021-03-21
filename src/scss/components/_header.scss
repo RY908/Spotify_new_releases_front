@@ -1,0 +1,90 @@
+$hd-min: 1200px;
+$desktop-max: 1199px;
+$desktop-min: 992px;
+$laptop-max: 991px;
+$laptop-min: 768px;
+$tablet-max: 767px;
+$tablet-min: 576px;
+$mobile-max: 575px;
+
+@mixin screen-hd {
+    @media screen and (min-width: $hd-min) {
+      @content;
+    }
+}
+@mixin screen-desktop {
+    @media screen and (min-width: $desktop-min) and (max-width: $desktop-max) {
+        @content;
+    }
+}
+@mixin screen-laptop {
+    @media screen and (min-width: $laptop-min) and (max-width: $laptop-max) {
+        @content;
+    }
+}
+@mixin screen-tablet {
+    @media screen and (min-width: $tablet-min) and (max-width: $tablet-max) {
+        @content;
+    }
+}
+@mixin screen-mobile {
+    @media screen and (max-width: $mobile-max) {
+        @content;
+    }
+}
+
+header {
+    padding: 0;
+    margin: 0 ;
+    top: 0;
+    width: 100%;
+    height: 20%;
+
+    .header-container {
+        margin-left: 10px;
+        img.logo {
+            // height: 200px;
+            // width: 200px;
+            margin-left: 10px;
+            // height: 10px;
+            // width: 10px;
+        }
+        @include screen-hd {
+            img.logo {
+                width: 20%;
+                height: auto;
+            }
+        }
+        @include screen-desktop {
+            img.logo {
+                width: 20%;
+                height: auto;
+            }
+        }
+        @include screen-laptop {
+            img.logo {
+                width: 20%;
+                height: auto;
+            }
+        }
+        @include screen-tablet {
+            img.logo {
+                width: 30%;
+                height: auto;
+            }
+        }
+        @include screen-mobile {
+            img.logo {
+                width: 30%;
+                height: auto;
+                margin-left: 3px;
+            }
+        }
+        #setting-header:hover {
+            cursor : pointer;
+            opacity: 0.6;
+            transition-duration: 0.3s;
+        }
+        
+    }
+}

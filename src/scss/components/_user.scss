@@ -1,3 +1,38 @@
+$hd-min: 1200px;
+$desktop-max: 1199px;
+$desktop-min: 992px;
+$laptop-max: 991px;
+$laptop-min: 768px;
+$tablet-max: 767px;
+$tablet-min: 576px;
+$mobile-max: 575px;
+
+@mixin screen-hd {
+    @media screen and (min-width: $hd-min) {
+      @content;
+    }
+}
+@mixin screen-desktop {
+    @media screen and (min-width: $desktop-min) and (max-width: $desktop-max) {
+        @content;
+    }
+}
+@mixin screen-laptop {
+    @media screen and (min-width: $laptop-min) and (max-width: $laptop-max) {
+        @content;
+    }
+}
+@mixin screen-tablet {
+    @media screen and (min-width: $tablet-min) and (max-width: $tablet-max) {
+        @content;
+    }
+}
+@mixin screen-mobile {
+    @media screen and (max-width: $mobile-max) {
+        @content;
+    }
+}
+
 .page {
     min-height: 100vh;
     .user-page {
@@ -8,57 +43,60 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center center;
+
+        @include screen-mobile {
+            .header-container>img.logo {
+                display:none;
+            }
+        }
         .navi-container {
             display: flex;
-            flex-wrap: wrap;
+            // flex-wrap: wrap;
             position: fixed;
             flex-direction: row;
             top: 3%;
             right: 3%;
-            // width: 100%;
-            // background:#6e8abe;
             background:rgb(56, 56, 56);
             align-items: center;
             justify-content: space-around;
             border-radius: 30px;
             z-index: 10;
-            // #to-guide{
-            //     display: flex;
-            //     flex-direction: column;
-            //     align-items: center;
-            //     #guide-icon {
-            //         width: 50px;
-            //         height: 50px;
-            //         // margin-right: 10px;
-            //     }
-            //     .guide {
-            //         font-size: 15px !important;
-            //         width: 100px;
-            //         // margin-right: 10px;
-            //         font-weight: bold;
-            //         .Modal {
-            //             .modal-button {
-            //                 font-size: 15px !important;
-            //                 text-decoration: none !important;
-            //             }
-            //             .modal-button:hover {
-            //                 text-decoration: underline !important;
-            //             }
-            //         }
-            //     }
-            // }
+            width: 60%;
+            height: 8%;
+            p {
+                margin-bottom: 0px;
+            }
+            @include screen-mobile {
+                width: 80%;
+                top: 5%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                height: 6%;
+            }
+            
             .guide {
-                font-size: 15px !important;
                 width: 100px;
-                // margin-right: 10px;
+                margin-right: 10px;
                 font-weight: bold;
+                @include screen-mobile {
+                    width: 40%;
+                }
                 .Modal {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
                     .modal-button {
-                        font-size: 15px !important;
+                        font-size: 2.0vw !important;
                         text-decoration: none !important;
                         #guide-icon {
                             width: 50px;
                             height: 50px;
+                        }
+                        @include screen-mobile {
+                            #guide-icon {
+                                width: 20px;
+                                height: 20px
+                            }
                         }
                     }
                     .modal-button:hover {
@@ -74,60 +112,42 @@
                 flex-direction: column;
                 align-items: center;
                 width: 100px;
-                // margin-right: 20px;
+                margin-right: 10px;
                 font-weight: bold;
-                font-size: 15px;
+                font-size: 2.0vw;
                 color: rgb(207, 207, 207);
+                @include screen-mobile {
+                    width: 40%;
+                    justify-content: flex-end;
+                }
+
                 #settings-icon {
                     width: 50px;
                     height: 50px;
+                    @include screen-mobile {
+                        width: 20px;
+                        height: 20px;
+                    }
                 }
                 #settings-icon:hover {
                     opacity: 0.7;
                 }
             }
-            // #to-logout {
-            //     display: flex;
-            //     flex-direction: column;
-            //     align-items: center;
-            //     justify-content: center;
-            //     width: 100px;
-            //     #logout-icon {
-            //         width: 50px;
-            //         height: 50px;
-            //         // margin-right: 10px;
-            //     }
-            //     .logout-area {
-            //         text-align: center;
-            //         // margin-right: 10px;
-            //         button {
-            //             text-decoration: none;
-            //             background-color: transparent;
-            //             font-weight: bold;
-            //             font-size: 15px;
-            //             color: rgb(207, 207, 207);
-            //             /* text-shadow: 0px 4px 2px rgba(0, 0, 0, 0.32), 0px 1px 0px #6182ca, 0px 2px 0px #4f6aa7, 0px 3px 0px #5470ad; */
-            //             border: none;
-            //             outline: none;
-            //             // padding-bottom: 10px;
-            //             // text-decoration: underline;
-            //         }
-            //         button:hover {
-            //             text-decoration: underline;
-            //         }
-            //     }
-            // }
+
             .logout-area {
                 display: flex;
                 text-align: center;
                 justify-content: center;
                 width: 100px;
+                @include screen-mobile {
+                    width: 40%;
+                }
                 // margin-right: 10px;
                 button {
                     text-decoration: none;
                     background-color: transparent;
                     font-weight: bold;
-                    font-size: 15px;
+                    font-size: 2.0vw;
                     color: rgb(207, 207, 207);
                     /* text-shadow: 0px 4px 2px rgba(0, 0, 0, 0.32), 0px 1px 0px #6182ca, 0px 2px 0px #4f6aa7, 0px 3px 0px #5470ad; */
                     border: none;
@@ -141,6 +161,10 @@
                     #logout-icon {
                         width: 50px;
                         height: 50px;
+                        @include screen-mobile {
+                            width: 20px;
+                            height: 20px;
+                        }
                     }
                     #logout-icon:hover {
                         opacity: 0.7;
@@ -153,13 +177,25 @@
 
             .delete-button-div {
                 text-align: center;
-                width: 300px;
-                height: 73px;
+                // width: 300px;
+                width: 50%;
+                // height: 73px;
+                height: 100%;
                 padding: 0px;
                 margin: 0px;
+                font-size: 2vw;
+                @include screen-hd {
+                    width: 40%; 
+                }
+                @include screen-mobile {
+                    width: 80%;
+                }
+
                 .delete-button {
-                    width: 300px;
-                    height: 73px;
+                    // width: 300px;
+                    width: 100%;
+                    // height: 73px;
+                    height: 100%;
                     z-index: 1;
                     border: transparent;
 
@@ -187,6 +223,10 @@
             margin: 0;
             margin-top: 30px;
             justify-content: center;
+            @include screen-mobile {
+                margin-top: 0px;
+                padding-top: 100px;
+            }
 
             .artist {
                 display: flex;
@@ -210,16 +250,54 @@
                     display:inline-block;
                     padding: 0 0 0 0px;
                 }
-
-                .artist-icon {
-                    height: 80px;
-                    width: 80px;
-                    border-radius: 50%;
-                }
                 
                 .artist-name {
                     text-align: center;
                     color: hsl(216, 85%, 62%);
+                }
+
+                @include screen-hd {
+                    width: 9%;
+                    label {
+                        width: 90px !important;
+                        height: 90px !important;
+                    }
+                }
+                @include screen-desktop {
+                    width: 9%;
+                    label {
+                        width: 90px !important;
+                        height: 90px !important;
+                    }
+                }
+                @include screen-laptop {
+                    width: 10%;
+                    label {
+                        width: 80px !important;
+                        height: 80px !important;
+                    }
+                }
+                @include screen-tablet {
+                    margin: 20px;
+                    width: 12%;
+                    label {
+                        width: 70px !important;
+                        height: 70px !important;
+                    }
+                    .artist-name {
+                        font-size: 1vw;
+                    }
+                }
+                @include screen-mobile {
+                    margin: 15px;
+                    width: 15.5%;
+                    label {
+                        width: 60px !important;
+                        height: 60px !important;
+                    }
+                    .artist-name {
+                        font-size: 1vw;
+                    }
                 }
             }
         }

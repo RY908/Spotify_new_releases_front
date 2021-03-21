@@ -1,17 +1,52 @@
+$hd-min: 1200px;
+$desktop-max: 1199px;
+$desktop-min: 992px;
+$laptop-max: 991px;
+$laptop-min: 768px;
+$tablet-max: 767px;
+$tablet-min: 576px;
+$mobile-max: 575px;
+
+@mixin screen-hd {
+    @media screen and (min-width: $hd-min) {
+      @content;
+    }
+}
+@mixin screen-desktop {
+    @media screen and (min-width: $desktop-min) and (max-width: $desktop-max) {
+        @content;
+    }
+}
+@mixin screen-laptop {
+    @media screen and (min-width: $laptop-min) and (max-width: $laptop-max) {
+        @content;
+    }
+}
+@mixin screen-tablet {
+    @media screen and (min-width: $tablet-min) and (max-width: $tablet-max) {
+        @content;
+    }
+}
+@mixin screen-mobile {
+    @media screen and (max-width: $mobile-max) {
+        @content;
+    }
+}
+
 .Modal {
     text-align: center;
     .modal-button {
         text-decoration: none;
         background-color: transparent;
         font-weight: bold;
-        font-size: 24px;
-        // color: #979797;
+        font-size: 3vw;
         color: rgb(207, 207, 207);
-        /* text-shadow: 0px 4px 2px rgba(0, 0, 0, 0.32), 0px 1px 0px #6182ca, 0px 2px 0px #4f6aa7, 0px 3px 0px #5470ad; */
         border: none;
         outline: none;
-        // padding-bottom: 10px;
         text-decoration: underline;
+        @include screen-mobile {
+            font-size: 4vw;
+        }
     }
 }
 
@@ -79,14 +114,34 @@
                 backface-visibility:hidden;
                 overflow:hidden;
                 overflow-y: auto;
+                z-index: 10;
 
 
                 &.content-after {
                     width: 60%;
-                    height: 50%;
                     background-color: rgb(240, 240, 240);
                     padding: 30px 20px 50px;
                     color: #50496d;
+                    @include screen-hd {
+                        height: 55%;
+                        padding: 30px 30px 50px;
+                    }
+                    @include screen-desktop {
+                        height: 52%;
+                    }
+                    @include screen-laptop {
+                        height: 53%;
+                        padding: 30px 30px 30px;
+                    }
+                    @include screen-tablet {
+                        height: 58%;
+                        padding: 30px 30px 10px;
+                    }
+                    @include screen-mobile {
+                        height: 40%;
+                        width: 65%;
+                        padding: 30px 30px 30px;
+                    }
 
                     &.content-before {
                         width: 0%;
@@ -126,27 +181,72 @@
                         transform: rotate(225deg);
                     }
                     .modal-logo {
-                        height: 85px;
-                        width: 126px;
                         margin-left: 0px;
+                        width: 20%;
+                        height: auto;
                     }
                     .modal-title {
                         font-weight: bold;
                     }
                     .about-this-app {
                         font-size: 18px;
+                        padding-left: 10px;
                     }
                     .about-user-page {
                         font-size: 18px;
-                    }
-                    .scopes {
-                        font-weight: bold;
+                        padding-left: 10px;
                     }
                     .scope-list {
                         font-size: 18px;
+                        padding-left: 10px;
+                    }
+                    .scopes {
+                        font-weight: bold;
+                        margin-bottom: 3%;
                     }
                     .user-page-instruction {
                         font-size: 18px;
+                        padding-left: 10px;
+                    }
+                    @include screen-hd {
+                        .about-this-app, .about-user-page, .scope-list, .user-page-instruction {
+                            font-size: 2.5vw;
+                        }
+                    }
+                    @include screen-desktop {
+                        .about-this-app, .about-user-page, .scope-list, .user-page-instruction {
+                            font-size: 2.5vw;
+                        }
+                    }
+                    @include screen-laptop {
+                        .about-this-app, .about-user-page, .scope-list, .user-page-instruction {
+                            font-size: 2.5vw;
+                        }
+                    }
+                    @include screen-tablet {
+                        .about-this-app, .about-user-page, .scope-list, .user-page-instruction {
+                            font-size: 2.5vw;
+                        }
+                    }
+                    @include screen-mobile {
+                        padding: 15px 10px 5px;
+                        .about-this-app, .scope-list {
+                            font-size: 2.5vw;
+                            padding-left: 5%;
+                        }
+                        .about-user-page, .user-page-instruction {
+                            padding-left:4%;
+                        }
+                        h2 {
+                            font-size: 4vw;
+                            padding-left: 3%;
+                        }
+                        .scope-list>ul {
+                            padding-inline-start: 20px;
+                        }
+                        .user-page-instruction>ul {
+                            padding-inline-start: 10px;
+                        }
                     }
                 } 
 
