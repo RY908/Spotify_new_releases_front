@@ -8,3 +8,5 @@ build/
 /src/env-config.js
 /src/js/components/PreArtist.js
 /src/js/components/PreCheckedArtist.js
+/src/js/components/PreUser.js
+/src/js/components/PreSetting.js
