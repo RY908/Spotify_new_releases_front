@@ -11,8 +11,8 @@ export default function Artist(props) {
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-        height: "70px",
         width: "70px",
+        height: "70px",
         display: "inline-block",
         padding: "0 0 0 0px",
         borderRadius: "50%"
