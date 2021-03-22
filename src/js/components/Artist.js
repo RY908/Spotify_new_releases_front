@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 export default function Artist(props) {
-    const [id, setId] = useState(props.artist.ArtistId)
-    const [name, setName] = useState(props.artist.Name)
-    const [url, setUrl] = useState(props.artist.Url)
-    const [iconUrl, setIconUrl] = useState(props.artist.IconUrl)
+    const [id, setId] = useState(props.artist.artistId)
+    const [name, setName] = useState(props.artist.name)
+    const [url, setUrl] = useState(props.artist.url)
+    const [iconUrl, setIconUrl] = useState(props.artist.iconUrl)
 
     const uncheckedStyle = {
         backgroundImage: `url(${iconUrl})`,

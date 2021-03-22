@@ -9,6 +9,7 @@ export default function User(props) {
     const [redirect, setRedirect] = useState("");
     const [checkedItems, setCheckedItems] = useState({});
     const [isBtnHide, setIsBtnHide] = useState(true);
+    const [showFollowings, setShowFollowings] = useState(true);
     const userUri = window._env_.LOCAL_USER_URI;
     const deleteUri = window._env_.LOCAL_DELETE_URI;
 
@@ -41,6 +42,10 @@ export default function User(props) {
             [e.target.id]: e.target.checked}
         setCheckedItems(newCheckedItems)
     };
+
+    const handleToggle = () => {
+        setShowFollowings(!showFollowings);
+    }
 
     const dataSendBtn = e => {
         //既定のイベントをキャンセルさせる
@@ -77,14 +82,20 @@ export default function User(props) {
                 : 
                 (<div className="user-page">
                     <Header />
-                    <Navigator page="userpage" isBtnHide={isBtnHide} onClick={dataSendBtn} />
+                    <Navigator page="userpage" isBtnHide={isBtnHide} onClick={dataSendBtn} onChange={handleToggle} flag={showFollowings} />
                     <div className="artistContainer">
                     {
                         artists.map(artist => {
-                            if (checkedItems[artist.ArtistId] === undefined) {
-                                checkedItems[artist.ArtistId] = false;
+                            if (checkedItems[artist.artistId] === undefined) {
+                                checkedItems[artist.artistId] = false;
                             }
-                            return <Artist key={artist.ArtistId} artist={artist} onChange={handleChange} checked={checkedItems[artist.ArtistId]} />
+                            if (showFollowings === true) {
+                                return <Artist key={artist.artistId} artist={artist} onChange={handleChange} checked={checkedItems[artist.artistId]} />
+                            } else {
+                                if (artist.ifFollowing === false) {
+                                    return <Artist key={artist.artistId} artist={artist} onChange={handleChange} checked={checkedItems[artist.artistId]} />
+                                }
+                            }
                         })
                     }
                     </div>
