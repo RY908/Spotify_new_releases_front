@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import Guide from "./Guide";
 import Logout from "./Logout";
+import Toggle from "./Toggle";
 
 export default function Navigator(props) {
     const [page, setPage] = useState(props.page)
@@ -10,10 +11,15 @@ export default function Navigator(props) {
         props.onClick(e)
     }
 
+    const handleChange = () => {
+        props.onChange()
+    }
+
     return (
         <div className="navigator">
             {page === "userpage" ?
                 <div className="navi-container"> 
+                    <Toggle className="show-followings" name="show-followings" explanation="Show following artists" onChange={handleChange} flag={props.flag} />
                     <Guide />
                     <Link to ="/setting" id="to-setting">
                         <img id="settings-icon" src="../img/icons/png/017-settings.png"/>
