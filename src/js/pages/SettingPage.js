@@ -67,12 +67,12 @@ export default function Setting(props) {
                         You can edit whether you want remix tracks or acoustic tracks in your playlist here. <br/>
                     </div>
 
-                    <Toggle className="remix" name="remix" onChange={handleRemixChange} flag={remix} />
+                    <Toggle className="remix" name="remix" explanation="Remix" onChange={handleRemixChange} flag={remix} />
                     <p id="remix-off-explanation">
                         If you set remix off, the application will remove tracks named "(track name)- Remix".
                     </p>
 
-                    <Toggle className="acoustic" name="acoustic" onChange={handleAcousticChange} flag={acoustic} />
+                    <Toggle className="acoustic" name="acoustic"  explanation="Acoustic" onChange={handleAcousticChange} flag={acoustic} />
                     <p id="acoustic-off-explanation">
                     If you set acoustic off, the application will remove tracks named "(track name) - Acoustic".
                     </p>
