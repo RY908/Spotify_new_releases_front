@@ -44,6 +44,12 @@ $mobile-max: 575px;
         background-attachment: fixed;
         background-position: center center;
 
+        @include screen-tablet {
+            .header-container>img.logo {
+                display:none;
+            }
+        }
+
         @include screen-mobile {
             .header-container>img.logo {
                 display:none;
@@ -61,10 +67,17 @@ $mobile-max: 575px;
             justify-content: space-around;
             border-radius: 30px;
             z-index: 10;
-            width: 60%;
-            height: 8%;
+            width: 70%;
+            // height: 8%;
             p {
                 margin-bottom: 0px;
+            }
+            @include screen-tablet {
+                width: 85%;
+                top: 5%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                height: 6%;
             }
             @include screen-mobile {
                 width: 80%;
@@ -73,13 +86,67 @@ $mobile-max: 575px;
                 transform: translate(-50%, -50%);
                 height: 6%;
             }
-            
+
+            .show-followings {
+                display: flex;
+                width: 200px;
+                margin-right: 10px;
+                // margin-left: auto;
+                // margin-right: auto;
+                justify-content: space-between;
+                align-items: center;
+                border-radius: 15px;
+
+                @include screen-tablet {
+                    width: 25%;
+                }
+
+                #show-followings {
+                    // margin-top: 50px;
+                    text-align: center;
+                    font-weight: bold;
+                    color: rgb(207, 207, 207);
+                    margin: 0;
+                    margin-left: 10px;
+                    margin-right: 5%;
+                    font-size: 1.2vw;
+                    @include screen-laptop {
+                        font-size: 1.0vw;
+                    }
+                    @include screen-tablet {
+                        font-size: 1.0vw;
+                    }
+                    @include screen-mobile {
+                        font-size: 0.9vw;
+                    }
+                }
+
+                .mt-ios-blue {
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: flex-end;
+
+                    label {
+                        margin-bottom: 0px;
+                    }
+                    @include screen-tablet {
+                        font-size: 11px;
+                    }
+                    @include screen-mobile {
+                        font-size: 10px;
+                    }
+                }
+            }
+
             .guide {
                 width: 100px;
                 margin-right: 10px;
                 font-weight: bold;
+                @include screen-tablet {
+                    width: 25%;
+                }
                 @include screen-mobile {
-                    width: 40%;
+                    width: 30%;
                 }
                 .Modal {
                     display: flex;
@@ -91,6 +158,12 @@ $mobile-max: 575px;
                         #guide-icon {
                             width: 50px;
                             height: 50px;
+                        }
+                        @include screen-tablet {
+                            #guide-icon {
+                                width: 25px;
+                                height: 25px
+                            }
                         }
                         @include screen-mobile {
                             #guide-icon {
@@ -116,14 +189,22 @@ $mobile-max: 575px;
                 font-weight: bold;
                 font-size: 2.0vw;
                 color: rgb(207, 207, 207);
+                @include screen-tablet {
+                    width: 25%;
+                    justify-self: flex-end;
+                }
                 @include screen-mobile {
-                    width: 40%;
+                    width: 30%;
                     justify-content: flex-end;
                 }
 
                 #settings-icon {
                     width: 50px;
                     height: 50px;
+                    @include screen-tablet {
+                        width: 25px;
+                        height: 25px;
+                    }
                     @include screen-mobile {
                         width: 20px;
                         height: 20px;
@@ -139,8 +220,11 @@ $mobile-max: 575px;
                 text-align: center;
                 justify-content: center;
                 width: 100px;
+                @include screen-tablet {
+                    width: 25%;
+                }
                 @include screen-mobile {
-                    width: 40%;
+                    width: 30%;
                 }
                 // margin-right: 10px;
                 button {
@@ -161,6 +245,10 @@ $mobile-max: 575px;
                     #logout-icon {
                         width: 50px;
                         height: 50px;
+                        @include screen-tablet {
+                            width: 25px;
+                            height: 25px;
+                        }
                         @include screen-mobile {
                             width: 20px;
                             height: 20px;
@@ -223,6 +311,11 @@ $mobile-max: 575px;
             margin: 0;
             margin-top: 30px;
             justify-content: center;
+            @include screen-tablet {
+                margin-top: 0px;
+                padding-top: 100px;
+            }
+
             @include screen-mobile {
                 margin-top: 0px;
                 padding-top: 100px;
