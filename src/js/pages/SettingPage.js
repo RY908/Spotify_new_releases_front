@@ -3,6 +3,7 @@ import { Redirect, Link, useHistory } from "react-router-dom";
 import Header from "../components/Header";
 import Toggle from "../components/Toggle";
 import Navigator from "../components/Navigator";
+import {handleErrors} from "../utils/ErrorHandle";
 
 export default function Setting(props) {
     const history = useHistory();
@@ -10,17 +11,27 @@ export default function Setting(props) {
     const [remix, setRemix] = useState(false);
     const [acoustic, setAcoustic] = useState(false);
     const [saved, setSaved] = useState(false);
+    const [hasErrors, setHasErrors] = useState(false);
     const settingUri = window._env_.LOCAL_SETTING_URI;
     const saveUri = window._env_.LOCAL_SAVE_URI;
 
     useEffect(() => {
         fetch(settingUri, {credentials: "include"})
+            .catch((e) => { throw Error(e); })
+            .then(handleErrors)
             .then(response => response.json())
             .then((json) => {
 		        console.log(json)
                 setRemix(json.ifRemixAdd)
                 setAcoustic(json.ifAcousticAdd)
                 setRedirect(json.Result)
+            })
+            .catch(error => {
+                setHasErrors(true)
+                console.log("error, ", error);
+                let errorMessage = "error: " + error + "\n" + "redirect to login page"
+                alert(errorMessage);
+                location.href = "/";
             })
     }, []);
 
@@ -32,11 +43,18 @@ export default function Setting(props) {
                 // "Content-Type": "application/json"
             },
             body: JSON.stringify({"ifRemixAdd": remix, "ifAcousticAdd": acoustic})
-        }).then(response => response.json())
-            .then((json) => {
-                if (json.result === "success") {
-                    setSaved(true);
-                }})
+        }).catch((e) => { throw Error(e);})
+        .then(handleErrors)
+        .then(response => {
+            setSaved(true);
+        })
+        .catch(error => {
+            setHasErrors(true)
+            console.log("error, ", error);
+            let errorMessage = "error: " + error + "\n" + "redirect to login page"
+            alert(errorMessage);
+            location.href = "/";
+        })
     }
 
     const handleRemixChange = () => {
@@ -55,7 +73,7 @@ export default function Setting(props) {
 
     return (
         <div className="page">
-            {redirect === "redirect" ? 
+            {hasErrors === true ? 
                 (<div>
                 <Redirect to="/" />
                 </div>) 

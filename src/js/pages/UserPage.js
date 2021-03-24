@@ -3,23 +3,33 @@ import { Redirect, Link } from "react-router-dom";
 import Header from "../components/Header";
 import Navigator from "../components/Navigator";
 import Artist from "../components/Artist";
+import {handleErrors} from "../utils/ErrorHandle";
 
 export default function User(props) {
     const [artists, setArtists] = useState([]);
-    const [redirect, setRedirect] = useState("");
     const [checkedItems, setCheckedItems] = useState({});
     const [isBtnHide, setIsBtnHide] = useState(true);
     const [showFollowings, setShowFollowings] = useState(true);
+    const [hasErrors, setHasErrors] = useState(false);
     const userUri = window._env_.LOCAL_USER_URI;
     const deleteUri = window._env_.LOCAL_DELETE_URI;
 
     useEffect(() => {
         fetch(userUri, {credentials: "include"})
-            .then(response => response.json())
+            .catch((e) => { throw Error(e); })
+            .then(handleErrors)
+            .then(reponse => reponse.json())
             .then((json) => {
                 console.log(json)
                 setArtists(json.artists)
                 console.log(artists)})
+            .catch(error => {
+                setHasErrors(true)
+                console.log("error, ", error);
+                let errorMessage = "error: " + error + "\n" + "redirect to login page"
+                alert(errorMessage);
+                location.href = "/";
+            })
     }, []);
 
     useEffect(() => {
@@ -63,21 +73,30 @@ export default function User(props) {
                 // "Content-Type": "application/json"
             },
             body: JSON.stringify({"artistsId": dataPushArray})
-        }).then(response => response.json())
-            .then((json) => {
-                console.log(json)
-                setArtists(json.artists)
-                setRedirect(json.result)
-                setIsBtnHide(false)
-                setCheckedItems({})
-                console.log("push")})
+        }).catch((e) => { throw Error(e); })
+        .then(handleErrors)
+        .then(response => response.json())
+        .then((json) => {
+            console.log(json)
+            setArtists(json.artists)
+            setRedirect(json.result)
+            setIsBtnHide(false)
+            setCheckedItems({})
+            console.log("push")})
+        .catch(error => {
+            setHasErrors(true)
+            console.log("error, ", error);
+            let errorMessage = "error: " + error + "\n" + "redirect to login page"
+            alert(errorMessage);
+            location.href = "/";
+        })
     }
 
     return (
         <div className="page">
-            {redirect === "redirect" ? 
+            {hasErrors === true ? 
                 (<div>
-                <Redirect to="/" />
+                    <Redirect to="/" />
                 </div>) 
                 : 
                 (<div className="user-page">
