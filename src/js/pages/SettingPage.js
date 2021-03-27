@@ -12,8 +12,8 @@ export default function Setting(props) {
     const [acoustic, setAcoustic] = useState(false);
     const [saved, setSaved] = useState(false);
     const [hasErrors, setHasErrors] = useState(false);
-    const settingUri = window._env_.LOCAL_SETTING_URI;
-    const saveUri = window._env_.LOCAL_SAVE_URI;
+    const settingUri = window._env_.SETTING_URI;
+    const saveUri = window._env_.SAVE_URI;
 
     useEffect(() => {
         fetch(settingUri, {credentials: "include"})

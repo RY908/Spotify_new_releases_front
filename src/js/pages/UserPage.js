@@ -11,8 +11,8 @@ export default function User(props) {
     const [isBtnHide, setIsBtnHide] = useState(true);
     const [showFollowings, setShowFollowings] = useState(true);
     const [hasErrors, setHasErrors] = useState(false);
-    const userUri = window._env_.LOCAL_USER_URI;
-    const deleteUri = window._env_.LOCAL_DELETE_URI;
+    const userUri = window._env_.USER_URI;
+    const deleteUri = window._env_.DELETE_URI;
 
     useEffect(() => {
         fetch(userUri, {credentials: "include"})
