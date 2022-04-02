@@ -40,7 +40,7 @@ export default function Setting(props) {
             method: "POST",
             credentials: "include",
             headers: {
-                // "Content-Type": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({"ifRemixAdd": remix, "ifAcousticAdd": acoustic})
         }).catch((e) => { throw Error(e);})

@@ -70,7 +70,7 @@ export default function User(props) {
             method: "POST",
             credentials: "include",
             headers: {
-                // "Content-Type": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({"artistsId": dataPushArray})
         }).catch((e) => { throw Error(e); })
@@ -79,7 +79,7 @@ export default function User(props) {
         .then((json) => {
             console.log(json)
             setArtists(json.artists)
-            setRedirect(json.result)
+            // setRedirect(json.result)
             setIsBtnHide(false)
             setCheckedItems({})
             console.log("push")})
@@ -105,14 +105,14 @@ export default function User(props) {
                     <div className="artistContainer">
                     {
                         artists.map(artist => {
-                            if (checkedItems[artist.artistId] === undefined) {
-                                checkedItems[artist.artistId] = false;
+                            if (checkedItems[artist.ID] === undefined) {
+                                checkedItems[artist.ID] = false;
                             }
                             if (showFollowings === true) {
-                                return <Artist key={artist.artistId} artist={artist} onChange={handleChange} checked={checkedItems[artist.artistId]} />
+                                return <Artist key={artist.ID} artist={artist} onChange={handleChange} checked={checkedItems[artist.ID]} />
                             } else {
                                 if (artist.ifFollowing === false) {
-                                    return <Artist key={artist.artistId} artist={artist} onChange={handleChange} checked={checkedItems[artist.artistId]} />
+                                    return <Artist key={artist.ID} artist={artist} onChange={handleChange} checked={checkedItems[artist.ID]} />
                                 }
                             }
                         })
